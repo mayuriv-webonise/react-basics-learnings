@@ -1,9 +1,12 @@
 # react-basics-learnings
+
+------------------------------------------------------
+
 create application with command 'npx create-react-app'.
 Note: app will be created with functional component.
 -Renders app component from index.js file.
 -created dashboard componet and user component(js files).
-------------------------------------------------------
+
 1.App component
 #topic covered
 a.creating state variable.
