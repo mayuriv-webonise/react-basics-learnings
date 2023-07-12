@@ -1,11 +1,13 @@
 import React from 'react';
 import './App.css';
+import './';
 import axios from "axios";
 
 function User(props) {
     const [dataArray, setDataArray] = React.useState([]);
+    const [editClicked, setEditClicked] = React.useState(false);
     const [userObject, setUserObject] = React.useState({
-        firstname: '', lastname: '', companyname: '', role: '', about: '', email: ''
+        id: '',firstname: '', lastname: '', companyname: '', role: '', about: '', email: ''
     });
     let tableHeders = ['Firstname', 'Lastname', 'Companyname', 'Role', 'Gender', 'Email'];
 
@@ -27,8 +29,8 @@ function User(props) {
     }, []);
     //UseEffect hook called whenever dependant state gets changed
     React.useEffect(() => {
-        console.log(dataArray)
-    }, [dataArray]);
+        console.log(dataArray,userObject)
+    }, [dataArray, userObject]);
 
 
     const handleInputChange = (evt) => {
@@ -38,22 +40,45 @@ function User(props) {
         setUserObject((userObject) => ({ ...userObject, [name]: value }));
     }
 
-    const handleAddUser = () => {
-        setDataArray(dataArray => [...dataArray, userObject]);
-        setUserObject(
-            {
-                firstname: '', lastname: '', companyname: '', role: '', about: 'M', email: ''
-            });
-        console.log(dataArray);
-    }
+    const handleAddUser = (e) => {
+        e.preventDefault();
+        if(editClicked){
+            setEditClicked(false);
+            let tempData = dataArray;
+            tempData.map((item)=> {
+                if(item.id === userObject.id){
+                    item=Object.assign(item, userObject);
+                }
+            })
+            
+            setDataArray(tempData);
+            setUserObject(
+                {
+                    id:'',firstname: '', lastname: '', companyname: '', role: '', about: 'M', email: ''
+                });
 
+        } else {
+            let obj = {...userObject, id:Math.floor(Math.random() * 100)}
+            
+            setDataArray(dataArray => [...dataArray, userObject]);
+            setUserObject(
+                {
+                    id:'',firstname: '', lastname: '', companyname: '', role: '', about: 'M', email: ''
+                });
+        }
+        
+    }
+    const handleEdit = (item) => (e) => {
+        setEditClicked(true);
+      setUserObject(item);
+    }
 
     return (
         <div className="App">
             <div>
                 <h3>Welcome to User component</h3>
             </div>
-            <div style={{ border: '1px solid black', height: '3%', width: '100%', padding: '3px' }}>
+            <form onSubmit={handleAddUser} style={{ border: '1px solid black', height: '3%', width: '100%', padding: '3px' }}>
                 <p>Add User</p>
                 <div style={{ marginBottom: '10px' }}>
                     <input className='mr-10' placeholder='Enter Firstname'
@@ -83,29 +108,33 @@ function User(props) {
                         value={userObject.email}
                         onChange={handleInputChange}>
                     </input>
+                   
                 </div>
                 <div>
-                    <button onClick={handleAddUser}> Add user</button>
+                    {editClicked ? <button type='submit'> Edit user</button> : <button type='submit'> Add user</button>}
+                    
                 </div>
 
-            </div>
+            </form>
             <div>
                 <table>
                     <thead>
-                        {tableHeders.map((item) => <th>{item}</th>)}
+                        {tableHeders.map((item, index) => <td key={index}>{item}</td>)}
                     </thead>
 
                     {dataArray && dataArray.map((item, index) => {
                         return (
-                            <tbody>
-                                <tr key={item.id}>
+                            <tbody key={item.id}>
+                                <tr >
                                     <td>{item.firstname}</td>
                                     <td>{item.lastname}</td>
                                     <td>{item.companyname}</td>
                                     <td>{item.role}</td>
                                     <td>{item.about}</td>
                                     <td>{item.email}</td>
-                                </tr></tbody>
+                                    <td><img className='editImg' src="./edit-icon.jpg" onClick={handleEdit(item)}/></td> 
+                                </tr>
+                            </tbody>
                         )
                     })}
                 </table>
