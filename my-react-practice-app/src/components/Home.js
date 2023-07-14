@@ -1,11 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
+
+import '../styles/App.css';
 import React from 'react';
 import Dashboard from './Dashboard';
 import User from './User';
 
 
-function App() {
+function Home() {
   //used state hook
   const [childMessage, setChildMessage] = React.useState('');
   let message = "Have a good day!";
@@ -24,17 +24,13 @@ function App() {
       </div>
 
       {/* render child component  */}
-      <div style={{ display: 'flex' }}> {/* unline styling syntax  */}
-        <div style={{ width: '35%' }}>
-          <Dashboard message={message} passName={showName}></Dashboard> {/* pass props to child this way */}
-        </div>
-        <div style={{ width: '65%' }}>
-          <User></User>
-        </div>
-      </div>
+      <Dashboard message={message} passName={showName}></Dashboard> {/* pass props to child this way */}
+
+
+
 
     </div>
   );
 }
 
-export default App;
+export default Home;

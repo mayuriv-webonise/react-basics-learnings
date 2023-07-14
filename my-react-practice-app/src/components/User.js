@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.css';
-import './';
+import '../styles/App.css';
+import '..';
 import axios from "axios";
 
 function User(props) {
@@ -28,9 +28,9 @@ function User(props) {
 
     }, []);
     //UseEffect hook called whenever dependant state gets changed
-    React.useEffect(() => {
-        console.log(dataArray,userObject)
-    }, [dataArray, userObject]);
+    // React.useEffect(() => {
+    //    console.log(dataArray);
+    // }, [dataArray, userObject]);
 
 
     const handleInputChange = (evt) => {
@@ -71,6 +71,14 @@ function User(props) {
     const handleEdit = (item) => (e) => {
         setEditClicked(true);
       setUserObject(item);
+    }
+    const handleDelete = (id)  => {
+
+        setDataArray(() =>
+            dataArray.filter(a =>
+              a.id !== id
+            )
+          );
     }
 
     return (
@@ -133,6 +141,7 @@ function User(props) {
                                     <td>{item.about}</td>
                                     <td>{item.email}</td>
                                     <td><img className='editImg' src="./edit-icon.jpg" onClick={handleEdit(item)}/></td> 
+                                    <td><img className='editImg' src="./delete-icon.png" onClick={() =>handleDelete(item.id)}/></td> 
                                 </tr>
                             </tbody>
                         )

@@ -1,12 +1,19 @@
 import React from 'react';
+  import {useNavigate} from "react-router-dom"
 
 function Dashboard(props) {
   const [displayMessage, setDispalyMessage] = React.useState('');
   const [count, setCount] = React.useState(0);
 
+  //usenavigate hook used to get navigate page
+  const navigate = useNavigate();
+
 
   //useRef hook used to get input value
   const nameRef = React.useRef();
+
+
+  
 //showing message from parent
   const handleButtonClick = () => {
     console.log(props.message);
@@ -28,8 +35,12 @@ function Dashboard(props) {
 
   return (
     <div className="App">
-      <div>
-        <h3>Welcome to dashboard component</h3>
+      
+      <div style={{display: 'flex', alignItems: 'center'}}>
+  <h3 style={{marginLeft: '42%'}}>Welcome to dashboard component</h3>
+  <button style={{marginLeft: '35%'}} onClick={()=>navigate("/user")}>Next topic</button>
+</div>
+        
         <button onClick={handleButtonClick}>Show message from parent app</button>
         <h6>{displayMessage}</h6>
         <p>======================================================</p>
@@ -44,7 +55,7 @@ function Dashboard(props) {
         Click me
       </button>
         </div>
-      </div>
+      
     </div>
   );
 }
