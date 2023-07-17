@@ -1,7 +1,7 @@
 import '../styles/App.css';
 import React, { useContext } from 'react';
 import {useNavigate} from "react-router-dom";
-
+import { AuthContext } from '../context/GlobalUserContext';
 
 
 export default function Login() {
@@ -9,6 +9,7 @@ export default function Login() {
     const password = React.useRef("");
     const role = React.useRef("");
 
+    const { state, dispatch } = useContext(AuthContext);
     
     const navigate = useNavigate();
 
@@ -19,7 +20,8 @@ export default function Login() {
 
 
 const handleClick = () =>{
-    navigate("/user")
+    dispatch({ type: 'LOGIN', payload: {usename:username.current.value, role:role.current.value} });
+    navigate("/home")
     
 }
 

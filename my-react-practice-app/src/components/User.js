@@ -3,6 +3,7 @@ import '../styles/App.css';
 import '..';
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import Header from './Header';
 
 function User(props) {
     const [dataArray, setDataArray] = React.useState([]);
@@ -86,7 +87,7 @@ function User(props) {
         <div className="App">
             <div style={{ display: 'flex', alignItems: 'center' }}>
                 <h3 style={{ marginLeft: '42%' }}>Welcome to User component</h3>
-                <button style={{ marginLeft: '35%' }} onClick={() => navigate("/context")}>Next topic</button>
+                <Header></Header>
             </div>
             <form onSubmit={handleAddUser} style={{ border: '1px solid black', height: '3%', width: '100%', padding: '3px' }}>
                 <p>Add User</p>

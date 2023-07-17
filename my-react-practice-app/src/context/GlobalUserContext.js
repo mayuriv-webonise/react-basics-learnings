@@ -1,26 +1,44 @@
-import { createContext , useState} from 'react';
-import User from '../components/User';
-import Dashboard from '../components/Dashboard';
-import Home from '../components/Home';
-import App from '../components/App';
+import { parse, stringify, toJSON, fromJSON } from 'flatted';
 
-const AppContext = createContext();
+import React, { createContext, useReducer } from 'react';
 
-export function UserContext() {
-    
-	const [ userName, setUserName ] = useState('test');
-    const [ role, setRole ] = useState('Developer');
-	
+export const AuthContext = createContext();
 
-	return (
-		<div className="App">
-			<AppContext.Provider value={{ userName, role }}>
-                <App/>
-				<User />
-				<Dashboard />
-                <Home/>
-			</AppContext.Provider>
-		</div>
-	);
+let initialState = {
+    isLoggedIn: false,
+    username: '',
+    role: ''
+};
+
+const saveUser = (payload) => {
+    console.log(payload);
+    initialState = { ...payload, isLoggedIn: true };
+    sessionStorage.setItem('loggedInuser', JSON.stringify(initialState));
+
 }
+const clearStorage = () => {
+    
+    sessionStorage.removeItem('loggedInuser');
 
+}
+const reducer = (state, action) => {
+    switch (action.type) {
+        case 'LOGIN':
+            return saveUser(action.payload);
+
+        case 'LOGOUT':
+            return clearStorage();
+        default:
+            return state;
+    }
+};
+
+export const AuthProvider = ({ children }) => {
+    const [state, dispatch] = useReducer(reducer, initialState);
+
+    return (
+        <AuthContext.Provider value={{ state, dispatch }}>
+            {children}
+        </AuthContext.Provider>
+    );
+};

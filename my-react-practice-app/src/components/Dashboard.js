@@ -38,7 +38,7 @@ function Dashboard(props) {
       
       <div style={{display: 'flex', alignItems: 'center'}}>
   <h3 style={{marginLeft: '42%'}}>Welcome to dashboard component</h3>
-  <button style={{marginLeft: '35%', width: '10% !important'}} onClick={()=>navigate("/user")}>Next topic</button>
+
 </div>
         
         <button onClick={handleButtonClick}>Show message from parent app</button>
