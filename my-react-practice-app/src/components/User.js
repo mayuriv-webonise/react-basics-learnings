@@ -2,16 +2,17 @@ import React from 'react';
 import '../styles/App.css';
 import '..';
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 function User(props) {
     const [dataArray, setDataArray] = React.useState([]);
     const [editClicked, setEditClicked] = React.useState(false);
     const [userObject, setUserObject] = React.useState({
-        id: '',firstname: '', lastname: '', companyname: '', role: '', about: '', email: ''
+        id: '', firstname: '', lastname: '', companyname: '', role: '', about: '', email: ''
     });
     let tableHeders = ['Firstname', 'Lastname', 'Companyname', 'Role', 'Gender', 'Email'];
 
-
+    const navigate = useNavigate();
 
     //UseEffect hook called whenever dependant state gets changed
     React.useEffect(() => {
@@ -36,55 +37,56 @@ function User(props) {
     const handleInputChange = (evt) => {
 
         const { name, value } = evt.target;
-        
+
         setUserObject((userObject) => ({ ...userObject, [name]: value }));
     }
 
     const handleAddUser = (e) => {
         e.preventDefault();
-        if(editClicked){
+        if (editClicked) {
             setEditClicked(false);
             let tempData = dataArray;
-            tempData.map((item)=> {
-                if(item.id === userObject.id){
-                    item=Object.assign(item, userObject);
+            tempData.map((item) => {
+                if (item.id === userObject.id) {
+                    item = Object.assign(item, userObject);
                 }
             })
-            
+
             setDataArray(tempData);
             setUserObject(
                 {
-                    id:'',firstname: '', lastname: '', companyname: '', role: '', about: 'M', email: ''
+                    id: '', firstname: '', lastname: '', companyname: '', role: '', about: 'M', email: ''
                 });
 
         } else {
-            let obj = {...userObject, id:Math.floor(Math.random() * 100)}
-            
+            let obj = { ...userObject, id: Math.floor(Math.random() * 100) }
+
             setDataArray(dataArray => [...dataArray, userObject]);
             setUserObject(
                 {
-                    id:'',firstname: '', lastname: '', companyname: '', role: '', about: 'M', email: ''
+                    id: '', firstname: '', lastname: '', companyname: '', role: '', about: 'M', email: ''
                 });
         }
-        
+
     }
     const handleEdit = (item) => (e) => {
         setEditClicked(true);
-      setUserObject(item);
+        setUserObject(item);
     }
-    const handleDelete = (id)  => {
+    const handleDelete = (id) => {
 
         setDataArray(() =>
             dataArray.filter(a =>
-              a.id !== id
+                a.id !== id
             )
-          );
+        );
     }
 
     return (
         <div className="App">
-            <div>
-                <h3>Welcome to User component</h3>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <h3 style={{ marginLeft: '42%' }}>Welcome to User component</h3>
+                <button style={{ marginLeft: '35%' }} onClick={() => navigate("/context")}>Next topic</button>
             </div>
             <form onSubmit={handleAddUser} style={{ border: '1px solid black', height: '3%', width: '100%', padding: '3px' }}>
                 <p>Add User</p>
@@ -116,11 +118,11 @@ function User(props) {
                         value={userObject.email}
                         onChange={handleInputChange}>
                     </input>
-                   
+
                 </div>
                 <div>
                     {editClicked ? <button type='submit'> Edit user</button> : <button type='submit'> Add user</button>}
-                    
+
                 </div>
 
             </form>
@@ -140,8 +142,8 @@ function User(props) {
                                     <td>{item.role}</td>
                                     <td>{item.about}</td>
                                     <td>{item.email}</td>
-                                    <td><img className='editImg' src="./edit-icon.jpg" onClick={handleEdit(item)}/></td> 
-                                    <td><img className='editImg' src="./delete-icon.png" onClick={() =>handleDelete(item.id)}/></td> 
+                                    <td><img className='editImg' src="./edit-icon.jpg" onClick={handleEdit(item)} /></td>
+                                    <td><img className='editImg' src="./delete-icon.png" onClick={() => handleDelete(item.id)} /></td>
                                 </tr>
                             </tbody>
                         )
