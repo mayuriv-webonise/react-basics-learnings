@@ -17,7 +17,7 @@ export default function Header(props) {
     const handleLogoutClick = () =>{
         dispatch({ type: 'LOGOUT'});
         sessionStorage.removeItem('loginuser');
-        navigate("/login",{ replace: false })
+        navigate("/",{ replace: false })
         
     }
     const navigate = useNavigate();

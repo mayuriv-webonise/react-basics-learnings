@@ -12,7 +12,6 @@ function App() {
  
       <Routes>
         <Route path='/' element={<Login />} />
-        <Route path='login' element={<Login />} />
         <Route path='user' element={<User />} />
         <Route path='home' element={<Home />} />
       </Routes>
