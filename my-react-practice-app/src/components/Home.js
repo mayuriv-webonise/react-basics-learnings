@@ -2,9 +2,9 @@
 import '../styles/App.css';
 import React from 'react';
 import Dashboard from './Dashboard';
-import User from './User';
+
 import Header from './Header';
-import { UserContext } from '../context/GlobalUserContext';
+
 
 
 function Home() {
@@ -25,7 +25,7 @@ function Home() {
     return (
         <div className="App">
 
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid black' }}>
                 <h1 style={{ marginLeft: '42%' }}>Welcome to my app {childMessage}...</h1>
                 <Header url="/user"></Header>
                 

@@ -9,18 +9,18 @@ export default function Login() {
     const password = React.useRef("");
     const role = React.useRef("");
 
-    const { state, dispatch } = useContext(AuthContext);
+    const {  dispatch } = useContext(AuthContext);
     
     const navigate = useNavigate();
 
-    React.useEffect(() => {
-        username.current.value ='test';
-        role.current.value ='developer';
-      }, []);
+    // React.useEffect(() => {
+    //     username.current.value ='test';
+    //     role.current.value ='developer';
+    //   }, []);
 
 
 const handleClick = () =>{
-    dispatch({ type: 'LOGIN', payload: {usename:username.current.value, role:role.current.value} });
+    dispatch({ type: 'LOGIN', payload: {username:username.current.value, role:role.current.value} });
     navigate("/home")
     
 }

@@ -1,7 +1,8 @@
 import React from 'react';
   import {useNavigate} from "react-router-dom"
+  import propTypes from 'prop-types';
 
-function Dashboard(props) {
+const Dashboard = ({message, passName}) =>{
   const [displayMessage, setDispalyMessage] = React.useState('');
   const [count, setCount] = React.useState(0);
 
@@ -16,8 +17,8 @@ function Dashboard(props) {
   
 //showing message from parent
   const handleButtonClick = () => {
-    console.log(props.message);
-    setDispalyMessage(props.message);
+   console.log(typeof(message));
+    setDispalyMessage(message);
   }
 
   // const sendName = () => {
@@ -28,7 +29,8 @@ function Dashboard(props) {
   //UseEffect hook called whenever dependant state gets changed
   React.useEffect(() => {
     if(count ===5){
-      props.passName(nameRef.current.value); 
+      passName(nameRef.current.value); 
+      setCount(0);
     }
   }, [count]); // Only re-run the effect if count changes
 
@@ -59,5 +61,10 @@ function Dashboard(props) {
     </div>
   );
 }
+
+Dashboard.propTypes = {
+  message: propTypes.string.isRequired,
+  passName: propTypes.func.isRequired
+};
 
 export default Dashboard;
