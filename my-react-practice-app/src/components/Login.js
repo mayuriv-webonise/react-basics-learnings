@@ -13,18 +13,14 @@ export default function Login() {
     
     const navigate = useNavigate();
 
-    // React.useEffect(() => {
-    //     username.current.value ='test';
-    //     role.current.value ='developer';
-    //   }, []);
-
 
 const handleClick = () =>{
     dispatch({ type: 'LOGIN', payload: {username:username.current.value, role:role.current.value} });
+    sessionStorage.setItem('loginuser',JSON.stringify({username:username.current.value, role:role.current.value}));
     navigate("/home")
     
 }
-
+    
     return (
         <div className="App">
             <div style={{ width: '100%', border: '1px solid #282c34' }}>

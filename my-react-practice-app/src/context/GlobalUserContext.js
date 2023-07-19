@@ -27,13 +27,17 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
         case 'LOGIN':
             return  Object.assign({}, state, {
-                isLoggedIn: false,
+                isLoggedIn: true,
                 username: action.payload.username,
                 role: action.payload.role
              })
 
         case 'LOGOUT':
-            return clearStorage();
+            return Object.assign({}, state, {
+                isLoggedIn: false,
+                username: '',
+                role: ''
+             });
         default:
             return state;
     }

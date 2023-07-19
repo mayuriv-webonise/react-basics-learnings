@@ -12,9 +12,6 @@ function Home() {
     const [childMessage, setChildMessage] = React.useState('');
     let message = "Have a good day!";
 
- 
-
-  // const {userName, role} = React.useContext(UserContext);
 
   //function expression for callback function(catch the data from child)
     const showName = (data) => {

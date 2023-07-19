@@ -8,10 +8,7 @@ export default function Header(props) {
     const { state, dispatch } = React.useContext(AuthContext);
     const [userDeatail, setUserDetail] = React.useState(state);
 
-//     React.useEffect(() => {
-//        const { Usename } = state;
-//    console.log(Usename)
-//       }, []); 
+
       React.useEffect(() => {
         console.log(userDeatail, state);
         
@@ -19,7 +16,8 @@ export default function Header(props) {
 
     const handleLogoutClick = () =>{
         dispatch({ type: 'LOGOUT'});
-        navigate("/login")
+        sessionStorage.removeItem('loginuser');
+        navigate("/login",{ replace: false })
         
     }
     const navigate = useNavigate();

@@ -15,8 +15,6 @@ function App() {
         <Route path='login' element={<Login />} />
         <Route path='user' element={<User />} />
         <Route path='home' element={<Home />} />
-        <Route path='' element={<Header />} />
-        
       </Routes>
     </AuthProvider>
 
