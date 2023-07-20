@@ -21,6 +21,8 @@ export default function Header(props) {
         
     }
     const navigate = useNavigate();
+
+    
     return (
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', width: '34%' }}>
            <div  style={{ margun: '15px'}}>User:  {state.username}<br/>

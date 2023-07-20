@@ -3,7 +3,26 @@ import React, { useContext } from 'react';
 import {useNavigate} from "react-router-dom";
 import { AuthContext } from '../context/GlobalUserContext';
 
-
+const css ={
+    "input[type=text], input[type=password] :": {
+        width: "30%",
+        padding: "12px 20px",
+        margin: "8px 0",
+        display: "inline-block",
+        border: "1px solid #ccc",
+        boxSizing: "border-box"
+      },
+      button: {
+        backgroundColor: "#1976d2",
+        color: "white",
+        padding: "14px 20px",
+        margin: "8px 0",
+        border: "none",
+        cursor: "pointer",
+        marginRight: '7px',
+        marginLeft: '10px'
+      }
+};
 export default function Login() {
     const username = React.useRef("");
     const password = React.useRef("");
@@ -20,7 +39,10 @@ const handleClick = () =>{
     navigate("/home")
     
 }
-    
+const handleSignUpClick = () =>{
+    navigate("/register")
+}
+
     return (
         <div className="App">
             <div style={{ width: '100%', border: '1px solid #282c34' }}>
@@ -31,7 +53,7 @@ const handleClick = () =>{
                     <label htmlFor="uname">
                         <b>Username</b>
                     </label><br/>
-                    <input ref={username} type="text" placeholder="Enter Username" name="uname" required="" /><br/>
+                    <input ref={username} type="text" placeholder="Enter Username" name="uname" required="" style={css['input[type=text], input[type=password] :']}/><br/>
                     <label htmlFor="psw">
                         <b>Password</b>
                     </label><br/>
@@ -41,6 +63,7 @@ const handleClick = () =>{
                         placeholder="Enter Password"
                         name="psw"
                         required=""
+                        style={css['input[type=text], input[type=password] :']}
                     /><br/>
                     <label htmlFor="role">
                         <b>Role</b>
@@ -51,8 +74,12 @@ const handleClick = () =>{
                         placeholder="Enter Role"
                         name="role"
                         required=""
+                        style={css['input[type=text], input[type=password] :']}
                     /><br/>
-                    <button onClick={handleClick}>Login</button>
+                    <div >
+                        <button style={css.button} onClick={handleClick}>Login</button>
+                        <button style={css.button} onClick={handleSignUpClick}>Sign Up</button>
+                    </div>
                     
                 </div>
                

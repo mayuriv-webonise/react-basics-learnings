@@ -62,7 +62,7 @@ tr:nth-child(even) {
 .mr-10{
   margin-right: 10px;
 } 
-input[type=text], input[type=password] {
+/* input[type=text], input[type=password] {
   width: 30%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -79,4 +79,4 @@ button {
   border: none;
   cursor: pointer;
 
-}
+} */
