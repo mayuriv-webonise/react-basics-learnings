@@ -13,6 +13,10 @@ App Component
 Login Component
 -added for context hook understanding
 -username and role will be updated in reducer state and shared through context to Header component.
+ SignUp page-
+ -it added to explore form validation using libraries.
+ -Added yup library for the basic for valodation
+
 
 Header component
 -added logout and page navigation and will display the user name and role of the loggedin user.
