@@ -16,45 +16,43 @@ import {useNavigate} from "react-router-dom";
 
 export default function Signup() {
     const [registerObject, setResgisterObject] = React.useState({ firstname: '', lastname: '', phone: '', email: '', password: '', role: '' });
+    const [formErr, setFormErr] = React.useState('');
     const navigate = useNavigate();
     const userSchema = yup.object().shape({
-        firstname: yup.string()
-    .min(2, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Firstname is required"),
-
-  lastname: yup.string()
-    .min(2, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Lastname is required"),
-
-  phone: yup.string()
+    role: yup.string().required('Role is required'),
+    password: yup.string()
+    .required("Password is required")
+    .min(6, "Password is too short - should be 6 chars minimum"),
+    phone: yup.string()
     .required("Phone number is required")
     .matches(
 /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/g,
       "Invalid phone number"
     ),
-
-  email: yup.string().email().required("Email is required"),
-
-  password: yup.string()
-    .required("Password is required")
-    .min(6, "Password is too short - should be 6 chars minimum"),
-    role: yup.string().required('Role is required')
+    email: yup.string().email().required("Email is required"),
+    lastname: yup.string()
+    .required("Lastname is required")
+    .min(2, "Lastname is Too Short!")
+    .max(50, "Too Long!"),
+    
+    firstname: yup.string().required("Firstname is required")
+    .min(2, "Firstname is Too Short!")
+    .max(50, "Too Long!")
+    
     })
 
 
-    async function validateForm() {
+    async function validateForm(e) {
 
         // validating this dataObject concerning Yup userSchema
-
-        const isValid = await userSchema.isValid(registerObject)
-console.log(isValid, registerObject);
-        if (isValid) {
-            alert('Form is Valid')
-        } else {
-            alert('Form is Invalid')
-        }
+        e.preventDefault();
+       try {
+            await userSchema.validate(registerObject);
+          } catch (err) {
+            console.log(err.name);  // => 'ValidationError'
+            console.log(err.errors); 
+            setFormErr(err.errors[0])// => ['Deve ser maior que 18']
+          }
     }
 
     const handleInputChange = (evt) => {
@@ -76,6 +74,7 @@ console.log(isValid, registerObject);
                             name="firstname"
                             required
                             fullWidth
+                            
                             id="firstname"
                             label="First Name"
                             value={registerObject.firstname}

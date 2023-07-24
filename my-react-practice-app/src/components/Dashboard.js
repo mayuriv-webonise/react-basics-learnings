@@ -2,6 +2,29 @@ import React from 'react';
   import {useNavigate} from "react-router-dom"
   import propTypes from 'prop-types';
 
+  const css ={
+    "input[type=text], input[type=password] :": {
+        width: "30%",
+        padding: "12px 20px",
+        margin: "8px 0",
+        display: "inline-block",
+        border: "1px solid #ccc",
+        boxSizing: "border-box"
+      },
+      button: {
+        backgroundColor: "#1976d2",
+        color: "white",
+        padding: "14px 20px",
+        margin: "8px 0",
+        border: "none",
+        cursor: "pointer",
+        marginRight: '7px',
+        marginLeft: '10px',
+        width: '10% !important'
+      }
+};
+
+
 const Dashboard = ({message, passName}) =>{
   const [displayMessage, setDispalyMessage] = React.useState('');
   const [count, setCount] = React.useState(0);
@@ -43,17 +66,17 @@ const Dashboard = ({message, passName}) =>{
 
 </div>
         
-        <button onClick={handleButtonClick}>Show message from parent app</button>
+        <button style={css.button} onClick={handleButtonClick}>Show message from parent app</button>
         <h6>{displayMessage}</h6>
         <p>======================================================</p>
         <div>
-          <input placeholder='Your name....' ref={nameRef}></input>
+          <input style={css['input[type=text], input[type=password] :']} placeholder='Your name....' ref={nameRef}></input>
         {/* <button onClick={sendName}>send name</button> */}
         </div>
         <div>
            {/* <p>You clicked {count} times</p> */}
            <p>Click 5 times to send name from child to parent : {count}</p>
-      <button onClick={() => setCount(count + 1)}>
+      <button style={css.button} onClick={() => setCount(count + 1)}>
         Click me
       </button>
         </div>

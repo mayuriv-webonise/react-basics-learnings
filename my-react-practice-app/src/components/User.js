@@ -5,6 +5,37 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import Header from './Header';
 
+const css ={
+    "input[type=text], input[type=password] :": {
+        width: "30%",
+        padding: "12px 20px",
+        margin: "10px",
+        display: "inline-block",
+        border: "1px solid #ccc",
+        boxSizing: "border-box"
+      },
+      button: {
+        backgroundColor: "#1976d2",
+        color: "white",
+        padding: "14px 20px",
+        margin: "8px 0",
+        border: "none",
+        cursor: "pointer",
+        marginRight: '7px',
+        marginLeft: '10px',
+        width: '10% !important'
+      },
+      select: {
+        width: "30%",
+        padding: "12px 20px",
+        margin: "10px",
+        display: "inline-block",
+        border: "1px solid #ccc",
+        boxSizing: "border-box"
+      }
+};
+
+
 function User(props) {
     const [dataArray, setDataArray] = React.useState([]);
     const [editClicked, setEditClicked] = React.useState(false);
@@ -87,42 +118,42 @@ function User(props) {
         <div className="App">
             <div style={{ display: 'flex', alignItems: 'center' }}>
                 <h3 style={{ marginLeft: '42%' }}>Welcome to User component</h3>
-                <Header></Header>
+                <Header url="/items"></Header>
             </div>
             <form onSubmit={handleAddUser} style={{ border: '1px solid black', height: '3%', width: '100%', padding: '3px' }}>
                 <p>Add User</p>
                 <div style={{ marginBottom: '10px' }}>
-                    <input className='mr-10' placeholder='Enter Firstname'
+                    <input className='mr-10' style={css['input[type=text], input[type=password] :']} placeholder='Enter Firstname'
                         name='firstname'
                         value={userObject.firstname}
                         onChange={handleInputChange}>
                     </input>
-                    <input className='mr-10' placeholder='Enter Lastname' name="lastname"
+                    <input className='mr-10' style={css['input[type=text], input[type=password] :']} placeholder='Enter Lastname' name="lastname"
                         value={userObject.lastname}
                         onChange={handleInputChange}>
                     </input>
-                    <input className='mr-10' placeholder='Enter Companyname' name="companyname"
+                    <input className='mr-10' style={css['input[type=text], input[type=password] :']} placeholder='Enter Companyname' name="companyname"
                         value={userObject.companyname}
                         onChange={handleInputChange}>
                     </input>
                 </div>
                 <div style={{ marginBottom: '10px' }}>
-                    <input className='mr-10' placeholder='Enter Role' name="role"
+                    <input className='mr-10' style={css['input[type=text], input[type=password] :']} placeholder='Enter Role' name="role"
                         value={userObject.role}
                         onChange={handleInputChange}>
                     </input>
-                    <select name="about" className='mr-10' onChange={handleInputChange} style={{ width: '190px' }}>
+                    <select name="about" className='mr-10' style={css.select} onChange={handleInputChange} >
                         <option value='M'>Male</option>
                         <option value='F'>Female</option>
                     </select>
-                    <input className='mr-10' placeholder='Enter Email' name="email"
+                    <input className='mr-10' style={css['input[type=text], input[type=password] :']} placeholder='Enter Email' name="email"
                         value={userObject.email}
                         onChange={handleInputChange}>
                     </input>
 
                 </div>
                 <div>
-                    {editClicked ? <button type='submit'> Edit user</button> : <button type='submit'> Add user</button>}
+                    {editClicked ? <button style={css.button} type='submit'> Edit user</button> : <button style={css.button} type='submit'> Add user</button>}
 
                 </div>
 
